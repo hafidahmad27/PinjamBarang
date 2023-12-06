@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">App Pinjam Barang</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="list_barang">
+        <item>Tablet</item>
+        <item>Laptop</item>
+    </string-array>
+</resources>
