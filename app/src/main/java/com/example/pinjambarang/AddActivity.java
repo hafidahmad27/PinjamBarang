@@ -22,7 +22,7 @@ import java.util.Locale;
 public class AddActivity extends AppCompatActivity {
 
     DBHelper helper;
-    EditText etNomor, etNama, etKeterangan, etTglPinjam, etStatus;
+    EditText etNama, etKeperluan, etTglPinjam, etTglKembali;
     Spinner spListBarang;
     long id;
     DatePickerDialog datePickerDialog;
@@ -37,16 +37,16 @@ public class AddActivity extends AppCompatActivity {
 
         id = getIntent().getLongExtra(DBHelper.row_id, 0);
 
-        etNomor = (EditText) findViewById(R.id.etNomor_Add);
         etNama = (EditText) findViewById(R.id.etNama_Add);
         spListBarang = (Spinner) findViewById(R.id.spListBarang_Add);
-        etKeterangan = (EditText) findViewById(R.id.etKeterangan_Add);
+        etKeperluan = (EditText) findViewById(R.id.etKeperluan_Add);
         etTglPinjam = (EditText) findViewById(R.id.etTglPinjam_Add);
-        etStatus = (EditText) findViewById(R.id.etStatus_Add);
+        etTglKembali = (EditText) findViewById(R.id.etTglKembali_Add);
 
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-
-        etTglPinjam.setOnClickListener(new View.OnClickListener() {
+        Calendar cal = Calendar.getInstance();
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        etTglPinjam.setText(dateFormatter.format(cal.getTime()));
+        etTglKembali.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showDateDialog();
             }
@@ -60,7 +60,7 @@ public class AddActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, month, dayOfMonth);
-                etTglPinjam.setText(dateFormatter.format(newDate.getTime()));
+                etTglKembali.setText(dateFormatter.format(newDate.getTime()));
             }
         },calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
@@ -74,22 +74,20 @@ public class AddActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.save_add){
-                String nomor = etNomor.getText().toString().trim();
                 String nama = etNama.getText().toString().trim();
                 String listBarang = spListBarang.getSelectedItem().toString().trim();
-                String keterangan = etKeterangan.getText().toString().trim();
+                String keperluan = etKeperluan.getText().toString().trim();
                 String tglPinjam = etTglPinjam.getText().toString().trim();
-                String status = etStatus.getText().toString().trim();
+                String tglKembali = etTglKembali.getText().toString().trim();
 
                 ContentValues values = new ContentValues();
-                values.put(DBHelper.row_nomor, nomor);
                 values.put(DBHelper.row_nama, nama);
                 values.put(DBHelper.row_barang, listBarang);
-                values.put(DBHelper.row_keterangan, keterangan);
+                values.put(DBHelper.row_keperluan, keperluan);
                 values.put(DBHelper.row_tglPinjam, tglPinjam);
-                values.put(DBHelper.row_status, status);
+                values.put(DBHelper.row_tglKembali, tglKembali);
 
-                if (nomor.equals("") || nama.equals("") || listBarang.equals("") || keterangan.equals("") || tglPinjam.equals("") || status.equals("")){
+                if (nama.equals("") || listBarang.equals("") || keperluan.equals("") || tglPinjam.equals("") || tglKembali.equals("")){
                     Toast.makeText(AddActivity.this, "Data tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 } else {
                     helper.insertData(values);

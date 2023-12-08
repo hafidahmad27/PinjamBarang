@@ -11,12 +11,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String table_name = "tb_peminjaman";
 
     public static final String row_id = "_id";
-    public static final String row_nomor = "Nomor";
     public static final String row_nama = "Nama";
     public static final String row_barang = "Barang";
-    public static final String row_keterangan = "Keterangan";
+    public static final String row_keperluan = "Keperluan";
     public static final String row_tglPinjam = "tanggal_pinjam";
-    public static final String row_status = "status";
+    public static final String row_tglKembali = "tanggal_kembali";
 
     private SQLiteDatabase db;
 
@@ -27,13 +26,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db){
         String query = "CREATE TABLE "+table_name+"("+row_id+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +row_nomor+" TEXT,"
                 +row_nama+" TEXT,"
                 +row_barang+" TEXT,"
-                +row_keterangan+" TEXT,"
+                +row_keperluan+" TEXT,"
                 +row_tglPinjam+" TEXT,"
-                +row_status+" TEXT)";
-
+                +row_tglKembali+" TEXT)";
         db.execSQL(query);
     }
 

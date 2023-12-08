@@ -24,23 +24,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nomor"
-                android:textStyle="bold"/>
-            <EditText
-                android:id="@+id/etNomor_Edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nama"
+                android:text="Nama Peminjam"
                 android:textStyle="bold"/>
             <EditText
                 android:id="@+id/etNama_Edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,10 +47,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Keterangan"
+                android:text="Keperluan"
                 android:textStyle="bold"/>
             <EditText
-                android:id="@+id/etKeterangan_Edit"
+                android:id="@+id/etKeperluan_Edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapSentences"/>
@@ -73,8 +64,18 @@
                 android:id="@+id/etTglPinjam_Edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="date"
-                android:focusable="false"/>
+                android:editable="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tgl. Kembali"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/etTglKembali_Edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"/>
 
             <TextView
                 android:layout_width="wrap_content"

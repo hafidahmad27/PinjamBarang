@@ -18,7 +18,7 @@
             android:id="@+id/listNama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nama Lengkap"
+            android:text="Nama Peminjam"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_margin="10dp"/>

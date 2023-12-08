@@ -10,11 +10,6 @@
     android:paddingRight="5dp">
 
     <TextView
-        android:id="@+id/tvNo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"/>
-    <TextView
         android:id="@+id/tvNama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,12 +20,17 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"/>
     <TextView
-        android:id="@+id/tvKeterangan"
+        android:id="@+id/tvKeperluan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"/>
     <TextView
         android:id="@+id/tvTglPinjam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"/>
+    <TextView
+        android:id="@+id/tvTglKembali"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"/>

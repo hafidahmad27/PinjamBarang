@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     DBHelper helper;
     LayoutInflater inflater;
     View dialogView;
-    TextView tvNomor, tvNama, tvBarang, tvKeterangan, tvTglPinjam, tvStatus;
+    TextView tvNama, tvBarang, tvKeperluan, tvTglPinjam, tvTglKembali;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,19 +98,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         viewData.setView(dialogView);
                         viewData.setTitle("Lihat Data");
 
-                        tvNomor = (TextView) dialogView.findViewById(R.id.tvNo);
                         tvNama = (TextView) dialogView.findViewById(R.id.tvNama);
                         tvBarang = (TextView) dialogView.findViewById(R.id.tvBarang);
-                        tvKeterangan = (TextView) dialogView.findViewById(R.id.tvKeterangan);
+                        tvKeperluan = (TextView) dialogView.findViewById(R.id.tvKeperluan);
                         tvTglPinjam = (TextView) dialogView.findViewById(R.id.tvTglPinjam);
-                        tvStatus = (TextView) dialogView.findViewById(R.id.tvStatus);
+                        tvTglKembali = (TextView) dialogView.findViewById(R.id.tvTglKembali);
 
-                        tvNomor.setText("Nomor: " + cur.getString(cur.getColumnIndex(DBHelper.row_nomor)));
                         tvNama.setText("Nama: " + cur.getString(cur.getColumnIndex(DBHelper.row_nama)));
                         tvBarang.setText("Barang: " + cur.getString(cur.getColumnIndex(DBHelper.row_barang)));
-                        tvKeterangan.setText("Keterangan: " + cur.getString(cur.getColumnIndex(DBHelper.row_keterangan)));
-                        tvTglPinjam.setText("Tgl Pinjam: " + cur.getString(cur.getColumnIndex(DBHelper.row_tglPinjam)));
-                        tvStatus.setText("Status: " + cur.getString(cur.getColumnIndex(DBHelper.row_status)));
+                        tvKeperluan.setText("Keperluan: " + cur.getString(cur.getColumnIndex(DBHelper.row_keperluan)));
+                        tvTglPinjam.setText("Tgl. Pinjam: " + cur.getString(cur.getColumnIndex(DBHelper.row_tglPinjam)));
+                        tvTglKembali.setText("Tgl. Kembali: " + cur.getString(cur.getColumnIndex(DBHelper.row_tglKembali)));
 
                         viewData.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {

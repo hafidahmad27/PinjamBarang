@@ -23,7 +23,7 @@ import java.util.Locale;
 public class EditActivity extends AppCompatActivity {
 
     DBHelper helper;
-    EditText etNomor, etNama, etKeterangan, etTglPinjam, etStatus;
+    EditText etNama, etKeperluan, etTglPinjam, etTglKembali, etStatus;
     Spinner spListBarang;
     long id;
     DatePickerDialog datePickerDialog;
@@ -37,16 +37,17 @@ public class EditActivity extends AppCompatActivity {
         helper = new DBHelper(this);
         id = getIntent().getLongExtra(DBHelper.row_id, 0);
 
-        etNomor = (EditText) findViewById(R.id.etNomor_Edit);
         etNama = (EditText) findViewById(R.id.etNama_Edit);
         spListBarang = (Spinner) findViewById(R.id.spListBarang_Edit);
-        etKeterangan = (EditText) findViewById(R.id.etKeterangan_Edit);
+        etKeperluan = (EditText) findViewById(R.id.etKeperluan_Edit);
         etTglPinjam = (EditText) findViewById(R.id.etTglPinjam_Edit);
+        etTglKembali = (EditText) findViewById(R.id.etTglKembali_Edit);
         etStatus = (EditText) findViewById(R.id.etStatus_Edit);
 
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-
-        etTglPinjam.setOnClickListener(new View.OnClickListener() {
+        Calendar cal = Calendar.getInstance();
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        etTglPinjam.setText(dateFormatter.format(cal.getTime()));
+        etTglKembali.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showDateDialog();
             }
@@ -61,7 +62,7 @@ public class EditActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, month, dayOfMonth);
-                etTglPinjam.setText(dateFormatter.format(newDate.getTime()));
+                etTglKembali.setText(dateFormatter.format(newDate.getTime()));
             }
         },calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
@@ -70,14 +71,12 @@ public class EditActivity extends AppCompatActivity {
     private void getData(){
         Cursor cursor = helper.oneData(id);
         if (cursor.moveToFirst()){
-            String nomor = cursor.getString(cursor.getColumnIndex(DBHelper.row_nomor));
             String nama = cursor.getString(cursor.getColumnIndex(DBHelper.row_nama));
             String barang = cursor.getString(cursor.getColumnIndex(DBHelper.row_barang));
-            String keterangan = cursor.getString(cursor.getColumnIndex(DBHelper.row_keterangan));
+            String keperluan = cursor.getString(cursor.getColumnIndex(DBHelper.row_keperluan));
             String tglPinjam = cursor.getString(cursor.getColumnIndex(DBHelper.row_tglPinjam));
-            String status = cursor.getString(cursor.getColumnIndex(DBHelper.row_status));
+            String tglKembali = cursor.getString(cursor.getColumnIndex(DBHelper.row_tglKembali));
 
-            etNomor.setText(nomor);
             etNama.setText(nama);
 
             if (barang.equals("Tablet")){
@@ -86,9 +85,10 @@ public class EditActivity extends AppCompatActivity {
                 spListBarang.setSelection(1);
             }
 
-            etKeterangan.setText(keterangan);
+            etKeperluan.setText(keperluan);
             etTglPinjam.setText(tglPinjam);
-            etStatus.setText(status);
+            etTglKembali.setText(tglKembali);
+            etStatus.setText("Sek yo..");
         }
     }
 
@@ -100,22 +100,20 @@ public class EditActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.save_edit){
-                String nomor = etNomor.getText().toString().trim();
                 String nama = etNama.getText().toString().trim();
                 String listBarang = spListBarang.getSelectedItem().toString().trim();
-                String keterangan = etKeterangan.getText().toString().trim();
+                String keperluan = etKeperluan.getText().toString().trim();
                 String tglPinjam = etTglPinjam.getText().toString().trim();
-                String status = etStatus.getText().toString().trim();
+                String tglKembali = etTglKembali.getText().toString().trim();
 
                 ContentValues values = new ContentValues();
-                values.put(DBHelper.row_nomor, nomor);
                 values.put(DBHelper.row_nama, nama);
                 values.put(DBHelper.row_barang, listBarang);
-                values.put(DBHelper.row_keterangan, keterangan);
+                values.put(DBHelper.row_keperluan, keperluan);
                 values.put(DBHelper.row_tglPinjam, tglPinjam);
-                values.put(DBHelper.row_status, status);
+                values.put(DBHelper.row_tglKembali, tglKembali);
 
-                if (nomor.equals("") || nama.equals("") || listBarang.equals("") || keterangan.equals("") || tglPinjam.equals("") || status.equals("")){
+                if (nama.equals("") || listBarang.equals("") || keperluan.equals("") || tglPinjam.equals("") || tglKembali.equals("")){
                     Toast.makeText(EditActivity.this, "Data tidak boleh kosong", Toast.LENGTH_SHORT);
                 } else {
                     helper.updateData(values, id);

@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3b5998</color>
     <color name="colorPrimaryDark">#3b4c98</color>
     <color name="colorAccent">#3b6998</color>
+
+    <color name="title">#2a3e7c</color>
+    <color name="background_warna">#00a2e9</color>
+    <color name="garis">#f22069</color>
 </resources>
