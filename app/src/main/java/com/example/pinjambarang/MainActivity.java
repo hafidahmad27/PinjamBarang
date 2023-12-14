@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     DBHelper helper;
     LayoutInflater inflater;
     View dialogView;
-    TextView tvNama, tvBarang, tvKeperluan, tvTglPinjam, tvTglKembali;
+    TextView tvNama, tvBarang, tvKeperluan, tvTglPinjam, tvTglKembali, tvStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,20 +57,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         listView.setOnItemClickListener(this);
     }
 
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public void setListView(){
         Cursor cursor = helper.allData();
         Adapter adpt = new Adapter(this, cursor, 1);
@@ -87,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Pilih Opsi");
 
-        String[] options = {"Lihat Data", "Edit Data", "Hapus Data"};
+        String[] options = {"Detail", "Edit", "Delete"};
         builder.setItems(options, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
@@ -96,19 +82,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         inflater = getLayoutInflater();
                         dialogView = inflater.inflate(R.layout.view_data, null);
                         viewData.setView(dialogView);
-                        viewData.setTitle("Lihat Data");
+                        viewData.setTitle("Detail Data");
 
                         tvNama = (TextView) dialogView.findViewById(R.id.tvNama);
                         tvBarang = (TextView) dialogView.findViewById(R.id.tvBarang);
                         tvKeperluan = (TextView) dialogView.findViewById(R.id.tvKeperluan);
                         tvTglPinjam = (TextView) dialogView.findViewById(R.id.tvTglPinjam);
                         tvTglKembali = (TextView) dialogView.findViewById(R.id.tvTglKembali);
+                        tvStatus = (TextView) dialogView.findViewById(R.id.tvStatus);
 
-                        tvNama.setText("Nama: " + cur.getString(cur.getColumnIndex(DBHelper.row_nama)));
-                        tvBarang.setText("Barang: " + cur.getString(cur.getColumnIndex(DBHelper.row_barang)));
-                        tvKeperluan.setText("Keperluan: " + cur.getString(cur.getColumnIndex(DBHelper.row_keperluan)));
-                        tvTglPinjam.setText("Tgl. Pinjam: " + cur.getString(cur.getColumnIndex(DBHelper.row_tglPinjam)));
-                        tvTglKembali.setText("Tgl. Kembali: " + cur.getString(cur.getColumnIndex(DBHelper.row_tglKembali)));
+                        tvNama      .setText("Nama Peminjam\t\t\t\t\t: " + cur.getString(cur.getColumnIndex(DBHelper.row_nama)));
+                        tvBarang    .setText("Barang Yg Dipinjam\t\t: " + cur.getString(cur.getColumnIndex(DBHelper.row_barang)));
+                        tvKeperluan .setText("Keperluan\t\t\t\t\t\t\t\t\t\t\t\t: " + cur.getString(cur.getColumnIndex(DBHelper.row_keperluan)));
+                        tvTglPinjam .setText("Tgl. Pinjam\t\t\t\t\t\t\t\t\t\t\t: " + cur.getString(cur.getColumnIndex(DBHelper.row_tglPinjam)));
+                        tvTglKembali.setText("Tgl. Kembali\t\t\t\t\t\t\t\t\t\t: " + cur.getString(cur.getColumnIndex(DBHelper.row_tglKembali)));
+                        tvStatus.    setText("Status\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: " + cur.getString(cur.getColumnIndex(DBHelper.row_status)));
 
                         viewData.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {

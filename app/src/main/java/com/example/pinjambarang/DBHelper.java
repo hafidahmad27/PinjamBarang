@@ -16,6 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String row_keperluan = "Keperluan";
     public static final String row_tglPinjam = "tanggal_pinjam";
     public static final String row_tglKembali = "tanggal_kembali";
+    public static final String row_status = "status";
 
     private SQLiteDatabase db;
 
@@ -30,7 +31,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 +row_barang+" TEXT,"
                 +row_keperluan+" TEXT,"
                 +row_tglPinjam+" TEXT,"
-                +row_tglKembali+" TEXT)";
+                +row_tglKembali+" TEXT,"
+                +row_status+" TEXT)";
         db.execSQL(query);
     }
 

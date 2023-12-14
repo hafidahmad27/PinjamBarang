@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class Adapter extends CursorAdapter {
@@ -19,7 +20,11 @@ public class Adapter extends CursorAdapter {
         View v = layoutInflater.inflate(R.layout.row_data, viewGroup, false);
         MyHolder holder = new MyHolder();
         holder.listID = (TextView)v.findViewById(R.id.listID);
+        holder.listBarang = (TextView) v.findViewById(R.id.listBarang);
         holder.listNama = (TextView)v.findViewById(R.id.listNama);
+        holder.listTglPinjam = (TextView)v.findViewById(R.id.listTglPinjam);
+        holder.listTglKembali = (TextView)v.findViewById(R.id.listTglKembali);
+        holder.listStatus = (TextView)v.findViewById(R.id.listStatus);
         v.setTag(holder);
         return v;
     }
@@ -28,11 +33,19 @@ public class Adapter extends CursorAdapter {
         MyHolder holder = (MyHolder)view.getTag();
 
         holder.listID.setText(cursor.getString(cursor.getColumnIndex(DBHelper.row_id)));
+        holder.listBarang.setText(cursor.getString(cursor.getColumnIndex(DBHelper.row_barang)));
         holder.listNama.setText(cursor.getString(cursor.getColumnIndex(DBHelper.row_nama)));
+        holder.listTglPinjam.setText(cursor.getString(cursor.getColumnIndex(DBHelper.row_tglPinjam)));
+        holder.listTglKembali.setText(cursor.getString(cursor.getColumnIndex(DBHelper.row_tglKembali)));
+        holder.listStatus.setText(cursor.getString(cursor.getColumnIndex(DBHelper.row_status)));
     }
 
-    class MyHolder{
+    class MyHolder {
         TextView listID;
+        TextView listBarang;
         TextView listNama;
+        TextView listTglPinjam;
+        TextView listTglKembali;
+        TextView listStatus;
     }
 }

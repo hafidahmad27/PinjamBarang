@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Barang"
+                android:text="Barang Yg Dipinjam"
                 android:textStyle="bold"/>
             <Spinner
                 android:id="@+id/spListBarang_Edit"
@@ -64,7 +64,7 @@
                 android:id="@+id/etTglPinjam_Edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:editable="false"/>
+                android:enabled="false"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -86,7 +86,13 @@
                 android:id="@+id/etStatus_Edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapSentences"/>
+                android:enabled="false"/>
+            <Button
+                android:id="@+id/btnPengembalian_Edit"
+                android:text="Proses Pengembalian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

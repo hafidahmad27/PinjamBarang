@@ -74,26 +74,28 @@ public class AddActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.save_add){
-                String nama = etNama.getText().toString().trim();
-                String listBarang = spListBarang.getSelectedItem().toString().trim();
-                String keperluan = etKeperluan.getText().toString().trim();
-                String tglPinjam = etTglPinjam.getText().toString().trim();
-                String tglKembali = etTglKembali.getText().toString().trim();
+            String nama = etNama.getText().toString().trim();
+            String listBarang = spListBarang.getSelectedItem().toString().trim();
+            String keperluan = etKeperluan.getText().toString().trim();
+            String tglPinjam = etTglPinjam.getText().toString().trim();
+            String tglKembali = etTglKembali.getText().toString().trim();
+            String status = "Dipinjam";
 
-                ContentValues values = new ContentValues();
-                values.put(DBHelper.row_nama, nama);
-                values.put(DBHelper.row_barang, listBarang);
-                values.put(DBHelper.row_keperluan, keperluan);
-                values.put(DBHelper.row_tglPinjam, tglPinjam);
-                values.put(DBHelper.row_tglKembali, tglKembali);
+            ContentValues values = new ContentValues();
+            values.put(DBHelper.row_nama, nama);
+            values.put(DBHelper.row_barang, listBarang);
+            values.put(DBHelper.row_keperluan, keperluan);
+            values.put(DBHelper.row_tglPinjam, tglPinjam);
+            values.put(DBHelper.row_tglKembali, tglKembali);
+            values.put(DBHelper.row_status, status);
 
-                if (nama.equals("") || listBarang.equals("") || keperluan.equals("") || tglPinjam.equals("") || tglKembali.equals("")){
-                    Toast.makeText(AddActivity.this, "Data tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                } else {
-                    helper.insertData(values);
-                    Toast.makeText(AddActivity.this, "Data Tersimpan", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
+            if (nama.equals("") || listBarang.equals("") || keperluan.equals("") || tglPinjam.equals("") || tglKembali.equals("")){
+                Toast.makeText(AddActivity.this, "Data tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            } else {
+                helper.insertData(values);
+                Toast.makeText(AddActivity.this, "Data Tersimpan", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
         return super.onOptionsItemSelected(item);
     }

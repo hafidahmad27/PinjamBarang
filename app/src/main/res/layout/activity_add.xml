@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Barang"
+                android:text="Barang Yg Dipinjam"
                 android:textStyle="bold"/>
             <Spinner
                 android:id="@+id/spListBarang_Add"
@@ -64,7 +64,7 @@
                 android:id="@+id/etTglPinjam_Add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:editable="false"/>
+                android:enabled="false"/>
 
             <TextView
                 android:layout_width="wrap_content"
