@@ -64,13 +64,31 @@ public class EditActivity extends AppCompatActivity {
                     String tglKembali = etTglKembali.getText().toString().trim();
                     String status = "Dikembalikan";
 
-                    ContentValues values = new ContentValues();
-                    values.put(DBHelper.row_tglKembali, tglKembali);
-                    values.put(DBHelper.row_status, status);
-                    helper.updateData(values, id);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
+                    builder.setMessage("Yakin ingin memproses pengembalian?");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ContentValues values = new ContentValues();
+                            values.put(DBHelper.row_tglKembali, tglKembali);
+                            values.put(DBHelper.row_status, status);
+                            helper.updateData(values, id);
 
-                    Intent i = new Intent(EditActivity.this, MainActivity.class);
-                    startActivity(i);
+                            Toast.makeText(EditActivity.this, "Berhasil memproses pengembalian", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(EditActivity.this, MainActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+                    builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
             }
         });
@@ -118,6 +136,7 @@ public class EditActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.edit_menu, menu);
         String status = etStatus.getText().toString().trim();
+
         if (status.equals("Dikembalikan")){
             etNama.setEnabled(false);
             spListBarang.setEnabled(false);
@@ -131,44 +150,44 @@ public class EditActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.save_edit){
-                String nama = etNama.getText().toString().trim();
-                String listBarang = spListBarang.getSelectedItem().toString().trim();
-                String keperluan = etKeperluan.getText().toString().trim();
-                String tglPinjam = etTglPinjam.getText().toString().trim();
+            String nama = etNama.getText().toString().trim();
+            String listBarang = spListBarang.getSelectedItem().toString().trim();
+            String keperluan = etKeperluan.getText().toString().trim();
+            String tglPinjam = etTglPinjam.getText().toString().trim();
 
-                ContentValues values = new ContentValues();
-                values.put(DBHelper.row_nama, nama);
-                values.put(DBHelper.row_barang, listBarang);
-                values.put(DBHelper.row_keperluan, keperluan);
-                values.put(DBHelper.row_tglPinjam, tglPinjam);
+            ContentValues values = new ContentValues();
+            values.put(DBHelper.row_nama, nama);
+            values.put(DBHelper.row_barang, listBarang);
+            values.put(DBHelper.row_keperluan, keperluan);
+            values.put(DBHelper.row_tglPinjam, tglPinjam);
 
-                if (nama.equals("") || listBarang.equals("") || keperluan.equals("") || tglPinjam.equals("")){
-                    Toast.makeText(EditActivity.this, "Data tidak boleh kosong", Toast.LENGTH_SHORT);
-                } else {
-                    helper.updateData(values, id);
-                    Toast.makeText(EditActivity.this, "Data Terupdate", Toast.LENGTH_SHORT).show();
+            if (nama.equals("") || listBarang.equals("") || keperluan.equals("") || tglPinjam.equals("")){
+                Toast.makeText(EditActivity.this, "Data tidak boleh kosong", Toast.LENGTH_SHORT);
+            } else {
+                helper.updateData(values, id);
+                Toast.makeText(EditActivity.this, "Data Terupdate", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        } else if (item.getItemId() == R.id.delete_edit){
+            AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
+            builder.setMessage("Data ini akan dihapus.");
+            builder.setCancelable(true);
+            builder.setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    helper.deleteData(id);
+                    Toast.makeText(EditActivity.this, "Data Terhapus", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-        } else if (item.getItemId() == R.id.delete_edit){
-                AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
-                builder.setMessage("Data ini akan dihapus.");
-                builder.setCancelable(true);
-                builder.setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        helper.deleteData(id);
-                        Toast.makeText(EditActivity.this, "Data Terhapus", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         }
         return super.onOptionsItemSelected(item);
     }

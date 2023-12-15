@@ -19,12 +19,14 @@ public class Adapter extends CursorAdapter {
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup){
         View v = layoutInflater.inflate(R.layout.row_data, viewGroup, false);
         MyHolder holder = new MyHolder();
+
         holder.listID = (TextView)v.findViewById(R.id.listID);
         holder.listBarang = (TextView) v.findViewById(R.id.listBarang);
         holder.listNama = (TextView)v.findViewById(R.id.listNama);
         holder.listTglPinjam = (TextView)v.findViewById(R.id.listTglPinjam);
         holder.listTglKembali = (TextView)v.findViewById(R.id.listTglKembali);
         holder.listStatus = (TextView)v.findViewById(R.id.listStatus);
+
         v.setTag(holder);
         return v;
     }

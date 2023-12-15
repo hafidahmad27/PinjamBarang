@@ -34,7 +34,6 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
 
         helper = new DBHelper(this);
-
         id = getIntent().getLongExtra(DBHelper.row_id, 0);
 
         etNama = (EditText) findViewById(R.id.etNama_Add);

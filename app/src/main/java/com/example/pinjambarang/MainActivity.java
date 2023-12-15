@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             }
         });
-
         AlertDialog dialog = builder.create();
         dialog.show();
     }

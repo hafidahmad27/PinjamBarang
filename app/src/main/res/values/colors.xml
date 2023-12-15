@@ -7,4 +7,5 @@
     <color name="title">#2a3e7c</color>
     <color name="background_warna">#00a2e9</color>
     <color name="garis">#f22069</color>
+    <color name="background_row_data">#2a567c</color>
 </resources>
